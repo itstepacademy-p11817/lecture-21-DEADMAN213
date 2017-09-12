@@ -70,10 +70,8 @@ int main(void) {
 	printf("Mas B: ");
 	printMas(B, sizeB);
 
-	uint8_t sizeC = findElem(A, B, C, sizeA, sizeB, findElem(B, A, C, sizeA, sizeB, 0));
-
 	printf("Mas C: ");
-	printMas(C, sizeC);
+	printMas(C, findElem(A, B, C, sizeA, sizeB, findElem(B, A, C, sizeA, sizeB, 0)));
 
 	return 0;
 }
