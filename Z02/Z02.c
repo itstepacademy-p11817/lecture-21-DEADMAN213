@@ -17,12 +17,12 @@ void printMas(int32_t* val, uint8_t size) {
 	printf("\n");
 }
 
-uint8_t newMas(uint32_t* A, uint32_t* B, uint32_t* C, uint8_t sizeA, uint8_t sizeB) {
-	uint8_t indC = 0;
+uint8_t findElem(uint32_t* A, uint32_t* B, uint32_t* C, uint8_t sizeA, uint8_t sizeB, uint8_t index) {
+	uint8_t indC = index;
 
 	for (uint8_t ind = 0; ind < sizeA; ind++) {
 		bool flag = true;
-		//mas A
+
 		for (uint8_t indB = 0; indB < sizeB; indB++) {
 			if (A[ind] == B[indB]) {
 				flag = false;
@@ -40,28 +40,6 @@ uint8_t newMas(uint32_t* A, uint32_t* B, uint32_t* C, uint8_t sizeA, uint8_t siz
 
 			if (flag) {
 				C[indC++] = A[ind];
-			}
-		}
-
-		//mas B
-		flag = true;
-		for (uint8_t indA = 0; indA < sizeB; indA++) {
-			if (B[ind] == A[indA]) {
-				flag = false;
-				break;
-			}
-		}
-
-		if (flag) {
-			for (uint8_t indA = 0; indA < indC; indA++) {
-				if (C[indA] == B[ind]) {
-					flag = false;
-					break;
-				}
-			}
-
-			if (flag) {
-				C[indC++] = B[ind];
 			}
 		}
 	}
@@ -92,7 +70,7 @@ int main(void) {
 	printf("Mas B: ");
 	printMas(B, sizeB);
 
-	uint8_t sizeC = newMas(A, B, C, sizeA, sizeB);
+	uint8_t sizeC = findElem(A, B, C, sizeA, sizeB, findElem(B, A, C, sizeA, sizeB, 0));
 
 	printf("Mas C: ");
 	printMas(C, sizeC);
